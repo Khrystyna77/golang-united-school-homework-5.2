@@ -25,7 +25,7 @@ func (receiver *Cache) Get(key string) (string, bool) {
 
 	v, ok := receiver.cashe[key]
 	if ok == true {
-		//fmt.Println(v)
+		fmt.Println(v.value, ok)
 		return v.value, ok
 	}
 	if !ok {
@@ -44,12 +44,9 @@ func (receiver *Cache) Put(key, value string) {
 
 func (receiver *Cache) Keys() []string {
 	output := make([]string, 0)
-	v1, ok := receiver.cashe[key]
-	if ok == false {
-		for k, v := range receiver.cashe {
-			output = append(output, k)
-		}
-		return output
+
+	for k, _ := range receiver.cashe {
+		output = append(output, k)
 	}
 	return output
 }
