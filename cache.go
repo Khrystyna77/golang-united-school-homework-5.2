@@ -6,7 +6,8 @@ import (
 )
 
 type Value struct {
-	value string
+	value    string
+	deadline time.Time
 }
 
 type Cache struct {
@@ -27,7 +28,7 @@ func (receiver *Cache) Get(key string) (string, bool) {
 		//fmt.Println(v)
 		return v.value, ok
 	}
-	if ok == false {
+	if !ok {
 		err1 := "not found this value"
 		fmt.Println(err1)
 
@@ -38,13 +39,20 @@ func (receiver *Cache) Get(key string) (string, bool) {
 }
 
 func (receiver *Cache) Put(key, value string) {
-	receiver.cashe[key] = Value{value: value}	
+	receiver.cashe[key] = Value{value: value}
+}
+
+func (receiver *Cache) Keys() []string {
+	output := make([]string, 0)
+	v1, ok := receiver.cashe[key]
+	if ok == false {
+		for k, v := range receiver.cashe {
+			output = append(output, k)
+		}
+		return output
 	}
-
+	return output
 }
 
-func (receiver) Keys() []string {
-}
-
-func (receiver) PutTill(key, value string, deadline time.Time) {
+func (receiver *Cache) PutTill(key, value string, deadline time.Time) {
 }
