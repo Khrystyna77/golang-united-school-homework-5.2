@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Identify struct {
+type Value struct {
 	value string
 }
 
@@ -20,11 +20,11 @@ func NewCache() Cache {
 //func (receiver) Get(key string) (string, bool) {
 
 //}
-func (b *Cas) Get(key string) (string, bool) {
+func (receiver *Cache) Get(key string) (string, bool) {
 
-	v, ok := b.cashall[key]
+	v, ok := receiver.cashe[key]
 	if ok == true {
-		fmt.Println(v)
+		//fmt.Println(v)
 		return v.value, ok
 	}
 	if ok == false {
@@ -32,10 +32,15 @@ func (b *Cas) Get(key string) (string, bool) {
 		fmt.Println(err1)
 
 	}
+
 	return "", false
+
 }
 
-func (receiver) Put(key, value string) {
+func (receiver *Cache) Put(key, value string) {
+	receiver.cashe[key] = Value{value: value}	
+	}
+
 }
 
 func (receiver) Keys() []string {
